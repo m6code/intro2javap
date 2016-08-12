@@ -22,19 +22,24 @@ public class FadeTransitionDemo extends Application {
 			pane.widthProperty().multiply(0.4));
 		ellipse.radiusYProperty().bind(
 			pane.heightProperty().multiply(0.4));
+		pane.getChildren().add(ellipse);
 
 		// Apply a fade transition to ellipse
 		FadeTransition ft = new FadeTransition(Duration.millis(3000), ellipse);
 		ft.setFromValue(1.0);
 		ft.setToValue(0.1);
 		ft.setCycleCount(Timeline.INDEFINITE);
-		ft.setAutoReverse(False);
+		ft.setAutoReverse(true);
 		ft.play(); // Starts animation
 
 		// Control animation
 		ellipse.setOnMousePressed(e -> ft.pause());
 		ellipse.setOnMousePressed(e -> ft.play());
 
-		
+		// Create a scene and place it in the stage
+		Scene scene = new Scene(pane, 600, 400);
+		primaryStage.setTitle("FadeTransitionDemo");
+		primaryStage.setScene(scene);
+		primaryStage.show(); // Display the stage
 	}
 }
